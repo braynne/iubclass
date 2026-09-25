@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COM30 · Taller 01 + Reto S02 · Evidencias</title>
+<style>
+  :root{--navy:#1A2A4A;--navy-deep:#0F1A33;--yellow:#F4C220;--line:#E8E8EE;--bg:#F7F7FA;--ok:#2D8A4E;--warn:#C44545;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Calibri','Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--navy);line-height:1.6}
+  .page{max-width:820px;margin:0 auto;background:#fff;box-shadow:0 0 30px rgba(0,0,0,.08)}
+  header{background:var(--navy);color:#fff;padding:26px 40px;border-top:6px solid var(--yellow)}
+  .eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--yellow);font-weight:800}
+  h1{font-size:24px;font-weight:800;margin-top:4px}
+  .meta{font-size:12.5px;color:rgba(255,255,255,.8);margin-top:6px}
+  main{padding:30px 40px 40px}
+  h2{font-size:18px;margin:28px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--yellow)}
+  h2:first-child{margin-top:0}
+  h3{font-size:15px;margin:18px 0 6px}
+  p{margin-bottom:10px;font-size:14px}
+  ol,ul{margin:0 0 10px 22px}
+  li{margin-bottom:5px;font-size:14px}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+  th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line)}
+  thead th{background:var(--navy);color:#fff;font-size:11px;text-transform:uppercase;letter-spacing:1px}
+  .num{text-align:right;font-family:Consolas,monospace}
+  code{font-family:Consolas,monospace;background:#EEF0F5;padding:1px 5px;border-radius:3px;font-size:12.5px}
+  .ok{background:#EAF5EE;border-left:4px solid var(--ok);padding:10px 14px;margin:12px 0;border-radius:0 6px 6px 0;font-size:13.5px}
+  .aviso{background:#FFFCEC;border-left:4px solid var(--yellow);padding:10px 14px;margin:12px 0;border-radius:0 6px 6px 0;font-size:13.5px}
+  figure{margin:14px 0}
+  figure img{width:100%;border:1px solid var(--line);border-radius:8px;box-shadow:0 4px 14px rgba(26,42,74,.12);display:block}
+  figcaption{font-size:12.5px;color:#595959;text-align:center;margin-top:6px}
+  figcaption b{color:var(--navy)}
+  footer{background:var(--navy-deep);color:rgba(255,255,255,.75);padding:16px 40px;font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <div class="eyebrow">COM30 · Programación con Frameworks para Web · IUB 2026-III</div>
+  <h1>Taller 01 + Reto S02 · Documento de evidencias</h1>
+  <div class="meta">Estudiante: <strong>Braynne Romero</strong> · Corte 1 · RA1</div>
+</header>
+
+<main>
+
+<!-- ============================================================ -->
+<h2>1 · La versión tradicional (Parte A) funcionando</h2>
+<p><code>frutas.html</code> se abre con doble clic, sin servidor ni instalación: tabla con subtotales calculados, total en dinero, total de unidades, botón «Vender un mango» (y uno «Vender 1» por fila) y el mensaje del requisito 5.</p>
+
+<figure>
+  <img src="A.1_Frutas_JS.png" alt="Estado inicial de frutas.html">
+  <figcaption><b>Captura A.1</b> · Estado inicial: total <b>72.800</b>, unidades <b>31</b>, mensaje «Jornada de venta mayorista» visible.</figcaption>
+</figure>
+
+<figure>
+  <img src="A.2_Frutas_JS_4Ventas.png" alt="frutas.html después de 4 ventas de mango">
+  <figcaption><b>Captura A.2</b> · Después de pulsar «Vender un mango» 4 veces: total <b>65.600</b>, unidades <b>27</b>.</figcaption>
+</figure>
+
+<figure>
+  <img src="A.3_Frutas_JS_MensajeOculto.png" alt="frutas.html con el mensaje oculto">
+  <figcaption><b>Captura A.3</b> · Mensaje <b>oculto</b>: se vendió todo el mango y una maracuyá, el total baja a <b>47.800</b> (&lt; $50.000) y el aviso desaparece.</figcaption>
+</figure>
+
+<!-- ============================================================ -->
+<h2>2 · La versión Angular (Parte B) funcionando</h2>
+<p>Componente <code>frutas</code> (<code>src/app/frutas/frutas.ts</code> y <code>frutas.html</code>): el estado en una <code>signal</code>, los dos totales en <code>computed</code>, la tabla con <code>@for</code> + <code>track</code>, el mensaje con <code>@if</code> y un botón «Vender 1» en cada fila (además del «Vender un mango» del enunciado).</p>
+
+<figure>
+  <img src="B.1_Frutas_Angular.png" alt="Vista /frutas con datos iniciales">
+  <figcaption><b>Captura B.1</b> · La vista <code>/frutas</code> con los datos iniciales: <b>72.800</b> y <b>31</b>.</figcaption>
+</figure>
+
+<figure>
+  <img src="B.2_Frutas_Angular_4Ventas.png" alt="Vista /frutas después de 4 ventas">
+  <figcaption><b>Captura B.2</b> · La vista <code>/frutas</code> después de 4 ventas: <b>65.600</b> y <b>27</b>.</figcaption>
+</figure>
+
+<figure>
+  <img src="B.3_Frutas_Angular_MensajeOculto.png" alt="Vista /frutas con el mensaje oculto">
+  <figcaption><b>Captura B.3</b> · El <code>@if</code> apagado solo: se vendió el mango y una maracuyá, el total es <b>47.800</b> (&lt; $50.000) y la tarjeta verde ya no aparece.</figcaption>
+</figure>
+
+<!-- ============================================================ -->
+<h2>3 · Parte C · La comparación escrita</h2>
+
+<h3>3.1 · Qué desapareció al pasar de la Parte A a la Parte B</h3>
+<p>Por lo menos cuatro cosas que escribí a mano en <code>frutas.html</code> y que en Angular no existen:</p>
+<ol>
+  <li><strong>La función <code>pintar()</code> y sus llamadas.</strong> En la parte tradicional yo tenía una función que reconstruía la tabla y recalculaba todo a mano, y tenía que acordarme de invocarla después de cada cambio de dato. En Angular no existe: la plantilla es declarativa y vuelve a calcularse sola cuando los datos cambian.</li>
+  <li><strong>Los <code>document.getElementById(...)</code> y el armado de filas con <code>createElement</code> / <code>innerHTML</code>.</strong> En la parte A buscaba cada casilla en el DOM, creaba cada <code>&lt;tr&gt;</code> y lo pegaba en el <code>tbody</code>. En Angular eso lo reemplaza el <code>@for</code> con su <code>track</code>: solo escribo cómo se ve <em>una</em> fila y la plantilla las repite todas.</li>
+  <li><strong>El <code>addEventListener</code> para enganchar el botón.</strong> En la parte B es un enlace <code>(click)="venderMango()"</code> en la etiqueta misma; no hay código que registre el oyente ni que lo des-registre.</li>
+  <li><strong>El manejo a mano del <code>style.display</code> del mensaje.</strong> Cambiar el atributo `display` de un elemento cada vez que pintaba era responsabilidad mía. Lo reemplaza una línea de <code>@if</code> que decide solo.</li>
+  <li><strong>El estado como variable global del script.</strong> En la parte A el arreglo de frutas era una variable suelta; en la parte B vive en una <code>signal</code>, que es la que se encarga de avisar a la pantalla cuando cambia.</li>
+</ol>
+
+<h3>3.2 · El requisito 5, lado a lado</h3>
+<p>Mostrar y ocultar el mensaje de «Jornada de venta mayorista»:</p>
+<ul>
+  <li><strong>Parte A:</strong> 5 líneas de JavaScript dentro de <code>pintar()</code> (un <code>if</code> con el <code>style.display</code> de un lado y del otro), más la línea HTML del elemento y el CSS que lo inicializa oculto. Y lo más importante: esas líneas solo corren si yo <em>me acordé</em> de llamar a <code>pintar()</code> tras cada venta.</li>
+  <li><strong>Parte B:</strong> 1 línea: el <code>@if (totalDinero() &gt; 50000)</code> en la plantilla. Cuando el total baja del umbral, el bloque deja de renderizarse solo.</li>
+</ul>
+<p>La diferencia enorme es <strong>dónde vive la decisión</strong>: en la parte A la decisión es un fragmento de código que ejecuto yo en el momento correcto; en la parte B es la descripción del resultado, y el framework se encarga de que la pantalla siempre coincida con ella.</p>
+<p class="aviso">Dato honesto que descubrí probando: vendiendo <em>solo</em> mangos el total más bajo alcanzable es $51.200 (72800 &minus; 12 &times; 1800), que <em>aún</em> supera el umbral. Por eso la versión trae el botón «Vender 1» en cada fila (como el tablero de la clase): vendiendo además patilla o maracuyá se cruza el umbral y se puede ver el mensaje encenderse y apagarse desde la interfaz, sin tocar los datos.</p>
+
+<h3>3.3 · Por qué en la Parte B es imposible el bug de «cambié el dato y la pantalla no se actualizó»</h3>
+<p>En la parte A la pantalla y los datos eran dos mundos que yo tenía que mantener sincronizados a golpe de <code>pintar()</code>: si cambiaba el arreglo y me olvidaba de repintar, la consola mostraba el dato nuevo y la pantalla el viejo. Ese error literalmente <strong>no se puede escribir</strong> en la parte B porque la pantalla no se pinta por orden mía: la plantilla <em>lee</em> la signal (por ejemplo <code>frutas()</code> dentro del <code>@for</code>), y Angular registra esa lectura como una dependencia. Cuando <code>venderMango()</code> cambia el estado con <code>.update()</code>, la signal avisa exactamente a los computeds y a las partes de la plantilla que la estaban leyendo, y se vuelven a calcular. El «repintado» ocurre porque la pantalla estaba suscrita al dato, no porque un método se haya ejecutado en el momento correcto.</p>
+
+<h3>3.4 · Lo que me costó más</h3>
+<p>En mi caso lo que más me costó fue acostumbrarme a <strong>no mutar</strong>: cambiar el arreglo por dentro (<code>cantidad--</code>, <code>push</code>, <code>sort</code> directo) me salía natural y "funcionaba" a medias, pero no se reflejaba en pantalla ni era robusto. Fue más tiempo y vueltas para acostumbrarme a ese estilo que por la lógica del problema en sí: subtotal = precio por cantidad era la misma en las dos partes.</p>
+
+<!-- ============================================================ -->
+<h2>4 · Tabla de verificación de resultados</h2>
+
+<h3>Taller 01 · el puesto de frutas</h3>
+<table>
+  <thead><tr><th>Resultado esperado</th><th>Parte A</th><th>Parte B</th></tr></thead>
+  <tbody>
+    <tr><td>Total en dinero al iniciar</td><td class="num">72.800</td><td class="num">72.800</td></tr>
+    <tr><td>Total de unidades al iniciar</td><td class="num">31</td><td class="num">31</td></tr>
+    <tr><td>Mensaje mayorista con 72.800</td><td>Sí aparece</td><td>Sí aparece</td></tr>
+    <tr><td>Total tras 4 ventas de mango</td><td class="num">65.600</td><td class="num">65.600</td></tr>
+    <tr><td>Unidades tras 4 ventas de mango</td><td class="num">27</td><td class="num">27</td></tr>
+    <tr><td>Mensaje mayorista con 65.600</td><td>Sigue apareciendo</td><td>Sigue apareciendo</td></tr>
+    <tr><td>Mensaje oculto bajo $50.000</td><td>Sí, se oculta</td><td>Sí, se oculta</td></tr>
+  </tbody>
+</table>
+
+<h3>Reto S02 · ampliación del tablero</h3>
+<table>
+  <thead><tr><th>Dato esperado</th><th class="num">Valor</th></tr></thead>
+  <tbody>
+    <tr><td>Total en dinero</td><td class="num">47.400</td></tr>
+    <tr><td>Unidades en el puesto</td><td class="num">23</td></tr>
+    <tr><td>Productos agotados (Reto 1)</td><td class="num">1</td></tr>
+    <tr><td>Aviso de inventario bajo (Reto 2)</td><td>Sí aparece</td></tr>
+    <tr><td>Producto más caro (Reto 3)</td><td>Ñame</td></tr>
+    <tr><td>Primera fila al ordenar (Reto 5)</td><td>Mango</td></tr>
+    <tr><td>Mensaje «Jornada de venta mayorista»</td><td>No aparece</td></tr>
+  </tbody>
+</table>
+
+<div class="ok">
+  <strong>Retos logrados:</strong> los cinco (contador de agotados, aviso de inventario bajo, producto más caro, «Vender todo» y orden por subtotal sin mutar la signal). El Reto 5 se ordena sobre una copia con el operador de propagación: <code>[...this.productos()].sort(...)</code>.
+</div>
+
+<figure>
+  <img src="Tablero_Angular_RetoFinal.png" alt="Tablero con los cinco retos funcionando">
+  <figcaption><b>Captura Reto</b> · El tablero con los cinco retos funcionando (tabla ordenada por subtotal, las tres tarjetas y el aviso amarillo).</figcaption>
+</figure>
+
+<!-- ============================================================ -->
+<h2>5 · El fork</h2>
+<p>Repositorio trabajado sobre un fork de <strong>github.com/kevindealbap10/iubclass</strong>:</p>
+<p style="font-weight:800">Fork: <a href="https://github.com/braynne/iubclass/tree/master">github.com/braynne/iubclass</a></p>
+
+</main>
+
+<footer>
+  <div><strong>COM30</strong> · Taller 01 + Reto S02 · 2026-III</div>
+  <div>Kevin Erney De Alba Pomárico · Institución Universitaria de Barranquilla</div>
+</footer>
+
+</div>
+</body>
+</html>

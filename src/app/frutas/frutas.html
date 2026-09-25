@@ -1,0 +1,82 @@
+<!--
+  PARTE B · Puesto de frutas de don Efraín.
+
+  Requisito 1 · la tabla se arma con @for y su TRACK. Sin track, el compilador
+  da el error NG5002. El subtotal se CALCULA en pantalla (precio * cantidad),
+  no viene escrito en los datos.
+-->
+<div class="rounded-xl border border-slate-200 bg-white">
+	<div class="border-b border-slate-100 px-5 py-3">
+		<h2 class="text-lg font-bold text-slate-900">Puesto de frutas de don Efraín</h2>
+		<p class="text-xs text-slate-500">Inventario del día · mercado de la plaza</p>
+	</div>
+
+	<table class="w-full text-left text-sm">
+		<thead class="bg-slate-900 text-xs uppercase tracking-wider text-white">
+			<tr>
+				<th class="px-5 py-3">Fruta</th>
+				<th class="px-5 py-3">Precio</th>
+				<th class="px-5 py-3">Cantidad</th>
+				<th class="px-5 py-3">Subtotal</th>
+				<th class="px-5 py-3">Acciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			@for (f of frutas(); track f.nombre) {
+				<tr class="border-t border-slate-100" [class.opacity-40]="f.cantidad === 0">
+					<td class="px-5 py-3 font-semibold text-slate-900">{{ f.nombre }}</td>
+					<td class="px-5 py-3 text-slate-600">{{ f.precio }}</td>
+					<td class="px-5 py-3 text-slate-600">{{ f.cantidad }}</td>
+					<!-- el subtotal cabe directo en la interpolación -->
+					<td class="px-5 py-3 font-semibold text-slate-900">
+						{{ f.precio * f.cantidad }}
+					</td>
+					<td class="px-5 py-3">
+						<button
+							type="button"
+							class="rounded-md bg-amber-400 px-3 py-1 text-xs font-bold text-slate-900 disabled:cursor-not-allowed disabled:opacity-30"
+							[disabled]="f.cantidad === 0"
+							(click)="vender(f.nombre)"
+						>
+							Vender 1
+						</button>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+
+	<!-- Requisitos 2 y 4 · los dos totales derivados -->
+	<div class="grid gap-3 border-t border-slate-100 p-5 sm:grid-cols-2">
+		<div class="rounded-xl bg-slate-900 px-5 py-4 text-white">
+			<div class="text-xs uppercase tracking-widest text-amber-400">Total en dinero</div>
+			<div class="mt-1 text-3xl font-bold">{{ totalDinero() }}</div>
+		</div>
+		<div class="rounded-xl bg-slate-100 px-5 py-4">
+			<div class="text-xs uppercase tracking-widest text-slate-500">Total de unidades</div>
+			<div class="mt-1 text-3xl font-bold text-slate-900">{{ totalUnidades() }}</div>
+		</div>
+	</div>
+
+	<!--
+    Requisito 5 · el mensaje con @if.
+    Esta línea es TODO lo que en la Parte A fueron cuatro líneas de pintar().
+    Cuando totalDinero() no supera los 50.000, el bloque no se renderiza.
+  -->
+	@if (totalDinero() > 50000) {
+		<div class="mx-5 mb-5 rounded-lg border-l-4 border-emerald-500 bg-emerald-50 px-5 py-3">
+			<p class="text-sm font-semibold text-emerald-900">Jornada de venta mayorista</p>
+		</div>
+	}
+
+	<!-- Requisito 3 · el botón. Nunca llama a pintar(): no existe. -->
+	<div class="border-t border-slate-100 px-5 py-4">
+		<button
+			type="button"
+			class="rounded-lg bg-amber-400 px-5 py-2 text-sm font-bold text-slate-900 transition hover:bg-amber-300"
+			(click)="venderMango()"
+		>
+			Vender un mango
+		</button>
+	</div>
+</div>

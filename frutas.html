@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Puesto de frutas de don Efraín · Taller 01</title>
+		<style>
+			/* ============================================================
+     PARTE A · La versión tradicional
+     Un solo archivo: HTML + CSS + JavaScript, DOM a mano.
+     ============================================================ */
+			:root {
+				--navy: #1a2a4a;
+				--navy-deep: #0f1a33;
+				--yellow: #f4c220;
+				--line: #e8e8ee;
+				--bg: #f7f7fa;
+			}
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+			body {
+				font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
+				background: var(--bg);
+				color: var(--navy);
+				line-height: 1.6;
+				display: flex;
+				justify-content: center;
+				padding: 2rem 1rem;
+			}
+			.carta {
+				width: 100%;
+				max-width: 760px;
+				background: #fff;
+				border-radius: 14px;
+				overflow: hidden;
+				box-shadow: 0 0 30px rgba(26, 42, 74, 0.12);
+			}
+			header {
+				background: linear-gradient(135deg, var(--navy), var(--navy-deep));
+				color: #fff;
+				padding: 1.6rem 2rem;
+				border-top: 6px solid var(--yellow);
+			}
+			header small {
+				text-transform: uppercase;
+				letter-spacing: 0.2em;
+				color: var(--yellow);
+				font-weight: 700;
+				font-size: 0.7rem;
+			}
+			header h1 {
+				margin-top: 0.3rem;
+				font-size: 1.6rem;
+			}
+			header p {
+				margin-top: 0.3rem;
+				font-size: 0.8rem;
+				opacity: 0.75;
+			}
+			main {
+				padding: 2rem;
+			}
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				font-size: 0.95rem;
+			}
+			thead th {
+				background: var(--navy);
+				color: #fff;
+				text-transform: uppercase;
+				font-size: 0.72rem;
+				letter-spacing: 0.08em;
+				padding: 0.7rem 0.9rem;
+				text-align: left;
+			}
+			thead th.num,
+			td.num {
+				text-align: right;
+			}
+			tbody td {
+				padding: 0.7rem 0.9rem;
+				border-bottom: 1px solid var(--line);
+			}
+			tbody tr:nth-child(even) td {
+				background: var(--bg);
+			}
+			tbody td.fruta {
+				font-weight: 700;
+			}
+			.totales {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 1rem;
+				margin: 1.4rem 0;
+			}
+			.total {
+				background: var(--navy);
+				color: #fff;
+				border-radius: 10px;
+				padding: 1rem 1.2rem;
+			}
+			.total.ligero {
+				background: var(--navy-deep);
+			}
+			.total small {
+				display: block;
+				text-transform: uppercase;
+				letter-spacing: 0.12em;
+				color: var(--yellow);
+				font-size: 0.66rem;
+				font-weight: 700;
+			}
+			.total strong {
+				display: block;
+				font-size: 1.7rem;
+				margin-top: 0.2rem;
+			}
+			/* Requisito 5: el mensaje NACE oculto y se enciende desde el JavaScript */
+			#mensaje {
+				display: none;
+				background: #eaf5ee;
+				border-left: 5px solid #2d8a4e;
+				color: #1f5e38;
+				border-radius: 0 8px 8px 0;
+				padding: 0.8rem 1rem;
+				margin-bottom: 1.4rem;
+				font-weight: 700;
+				font-size: 0.95rem;
+			}
+			button {
+				background: var(--yellow);
+				color: var(--navy);
+				font-weight: 800;
+				font-size: 0.95rem;
+				border: 0;
+				border-radius: 8px;
+				padding: 0.7rem 1.2rem;
+				cursor: pointer;
+				transition: transform 0.06s ease;
+			}
+			button:hover {
+				transform: translateY(-1px);
+			}
+			button:active {
+				transform: translateY(1px);
+			}
+			button:disabled {
+				opacity: 0.4;
+				cursor: not-allowed;
+				transform: none;
+			}
+			footer {
+				padding: 1rem 2rem;
+				background: var(--navy-deep);
+				color: rgba(255, 255, 255, 0.6);
+				font-size: 0.72rem;
+				display: flex;
+				justify-content: space-between;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="carta">
+			<header>
+				<small>COM30 · Taller 01 · Parte A</small>
+				<h1>Puesto de frutas de don Efraín</h1>
+				<p>Inventario del día · mercado de la plaza</p>
+			</header>
+
+			<main>
+				<!-- Requisito 1: la tabla. El <tbody> arranca VACÍO: lo llena la función pintar(). -->
+				<table>
+					<thead>
+						<tr>
+							<th>Fruta</th>
+							<th class="num">Precio</th>
+							<th class="num">Cantidad</th>
+							<th class="num">Subtotal</th>
+							<th>Vender</th>
+						</tr>
+					</thead>
+					<tbody id="cuerpo-tabla"></tbody>
+				</table>
+
+				<!-- Requisito 5: hueco para el mensaje. Solo se ve si el JavaScript lo muestra. -->
+				<p id="mensaje">Jornada de venta mayorista</p>
+
+				<!-- Requisitos 2 y 4: los dos totales, cada uno con su casilla. -->
+				<div class="totales">
+					<div class="total">
+						<small>Total en dinero</small>
+						<strong id="total-dinero">0</strong>
+					</div>
+					<div class="total ligero">
+						<small>Total de unidades</small>
+						<strong id="total-unidades">0</strong>
+					</div>
+				</div>
+
+				<!-- Requisito 3: el botón que cambia los datos. -->
+				<button id="btn-vender" type="button">Vender un mango</button>
+			</main>
+
+			<footer>
+				<span>Los subtotales y los totales se calculan, no se escriben a mano.</span>
+				<span>Taller 01 · Parte A</span>
+			</footer>
+		</div>
+
+		<script>
+			/* ============================================================
+     LOS DATOS · el arreglo de frutas, igual que en la Parte B.
+     ============================================================ */
+			var frutas = [
+				{ nombre: 'Mango', precio: 1800, cantidad: 12 },
+				{ nombre: 'Guayaba', precio: 1200, cantidad: 8 },
+				{ nombre: 'Patilla', precio: 6500, cantidad: 2 },
+				{ nombre: 'Maracuyá', precio: 3400, cantidad: 5 },
+				{ nombre: 'Níspero', precio: 2900, cantidad: 4 },
+			];
+
+			// Se capturan las tres zonas de la página que pintar() va a tocar.
+			var cuerpo = document.getElementById('cuerpo-tabla');
+			var totalDinero = document.getElementById('total-dinero');
+			var totalUnidades = document.getElementById('total-unidades');
+			var mensaje = document.getElementById('mensaje');
+
+			/*
+     pintar() ES la aplicación: construye la tabla desde el arreglo,
+     recalcula los dos totales y decide si el mensaje se ve o no.
+     Cada vez que un dato cambia, hay que VOLVER A LLAMARLA: esa es la
+     diferencia con la Parte B, donde el repintado no escribe nadie.
+  */
+			function pintar() {
+				var sumDinero = 0;
+				var sumUnidades = 0;
+
+				// 1. Vacia el <tbody> y reconstruye una fila por fruta.
+				cuerpo.innerHTML = '';
+				for (var i = 0; i < frutas.length; i++) {
+					var f = frutas[i];
+					var subtotal = f.precio * f.cantidad; // se calcula, no viene escrito
+					sumDinero += subtotal;
+					sumUnidades += f.cantidad;
+
+					var tr = document.createElement('tr');
+					tr.innerHTML =
+						'<td class="fruta">' +
+						f.nombre +
+						'</td>' +
+						'<td class="num">' +
+						f.precio +
+						'</td>' +
+						'<td class="num">' +
+						f.cantidad +
+						'</td>' +
+						'<td class="num">' +
+						subtotal +
+						'</td>' +
+						'<td class="accion"><button type="button" class="vender">Vender 1</button></td>';
+					cuerpo.appendChild(tr);
+
+					// Cada fila engancha su propio botón, aquí mismo. El cierre sobre
+					// nombre guarda cuál es la fruta de esta fila.
+					var botonFila = tr.querySelector('.vender');
+					if (f.cantidad === 0) botonFila.setAttribute('disabled', 'disabled');
+					botonFila.addEventListener(
+						'click',
+						(function (nombre) {
+							return function () {
+								vender(nombre);
+							};
+						})(f.nombre),
+					);
+				}
+
+				// 2. Pinta los totales en sus casillas.
+				totalDinero.textContent = sumDinero;
+				totalUnidades.textContent = sumUnidades;
+
+				// 3. REQUISITO 5, A MANO: aquí es responsabilidad nuestra mostrar
+				//    u ocultar el mensaje en cada repintado. Son estas cuatro líneas.
+				//    En la Parte B van a costar una: la del @if.
+				if (sumDinero > 50000) {
+					mensaje.style.display = 'block';
+				} else {
+					mensaje.style.display = 'none';
+				}
+			}
+
+			// Requisito 3: el botón, enganchado con addEventListener.
+			document.getElementById('btn-vender').addEventListener('click', function () {
+				vender('Mango');
+			});
+
+			/* vender(nombre): la venta de UNA unidad de la fruta indicada.
+     Con los botones de cada fila se puede vender cualquier fruta y, así,
+     bajar el total por debajo de $50.000 para probar el requisito 5.
+     Es lo mismo que hace el tablero de la plaza de clase, a mano. */
+			function vender(nombre) {
+				for (var i = 0; i < frutas.length; i++) {
+					if (frutas[i].nombre === nombre && frutas[i].cantidad > 0) {
+						frutas[i].cantidad--; // el dato cambia...
+					}
+				}
+				pintar(); // ...y hay que repintar, o la pantalla se queda vieja.
+			}
+
+			// Encendido inicial de la aplicación.
+			pintar();
+		</script>
+	</body>
+</html>
