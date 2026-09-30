@@ -14,24 +14,36 @@ Quien trabaja en StackBlitz tiene los seis ejemplos en un solo archivo:
 
 ## Antes de abrir los ejemplos: el entorno local
 
-Primera parte de la sesión (diapositivas 5 a 16). Se ejecuta en **Símbolo del sistema (cmd)**,
-no en PowerShell.
+Primera parte de la sesión (diapositivas 5 a 16). En los equipos de la sala Node.js está
+instalado, pero su carpeta **no está en el PATH**: `node`, `npm` y `ng` «no se reconocen». La
+corrección no pide administrador y vale para la ventana donde se ejecuta. Se trabaja en
+**Símbolo del sistema (cmd)**, no en PowerShell.
 
 ```
+REM 1. Antes de clonar: Node.js y la carpeta global de npm en el PATH de esta ventana
+set "PATH=C:\Program Files\nodejs;%APPDATA%\npm;%PATH%"
 node -v                     v22.22 o superior, o v24.15 o superior
 npm -v
 git --version
 
+REM 2. Clonar, instalar y ejecutar
 git clone https://github.com/SU_USUARIO/iubclass.git
 cd iubclass
 npm install                 reconstruye node_modules a partir de package-lock.json
 npx ng serve                abre la aplicación en http://localhost:4200
 ```
 
-- Antes de clonar, en la página de su fork en GitHub: **Sync fork → Update branch**. Si no lo
-  hace, su copia no tiene la carpeta `src/app/s04/`.
-- `npm install -g @angular/cli` instala el comando `ng` para su usuario. Si después `ng` «no se
-  reconoce como un comando», use `npx ng`, que ejecuta la CLI instalada dentro del proyecto.
+- **Cada ventana nueva de cmd necesita el PATH otra vez.** Dentro del proyecto basta con
+  `.\entorno-sala.cmd`, que hace lo mismo y muestra las versiones.
+- **En VS Code no hace falta nada:** `.vscode/settings.json` abre las terminales en cmd con
+  Node en el PATH, y `.vscode/tasks.json` trae las tareas *COM30 · 1 Verificar entorno*,
+  *2 Instalar dependencias*, *3 Servidor de desarrollo* y *4 Compilar* (Terminal → Ejecutar
+  tarea). La primera vez, VS Code pregunta si confía en los autores de la carpeta: sin
+  confiar, no aplica esta configuración.
+- Escribir la ruta completa (`"C:\Program Files\nodejs\npm.cmd"`) sirve para `npm`, pero
+  no para `ng`: el lanzador de `ng` busca `node` en el PATH y falla con
+  `"node" no se reconoce como un comando interno o externo`.
+- Antes de clonar, en la página de su fork en GitHub: **Sync fork → Update branch**.
 - `node_modules` no se sube a GitHub ni se entrega en el ZIP: `npm install` la reconstruye.
 
 ---

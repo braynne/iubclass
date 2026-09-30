@@ -1,0 +1,12 @@
+{
+  // COM30 · Entorno de la sala.
+  // Node.js está instalado en los equipos, pero no en el PATH. Estas dos líneas
+  // hacen que toda terminal nueva de VS Code abra en cmd (no en PowerShell, que
+  // bloquea npm.ps1) y con Node y la carpeta global de npm en el PATH.
+  // Si Node.js está en otra carpeta, cambie C:\\Program Files\\nodejs aquí y en
+  // .vscode/tasks.json.
+  "terminal.integrated.defaultProfile.windows": "Command Prompt",
+  "terminal.integrated.env.windows": {
+    "PATH": "C:\\Program Files\\nodejs;${env:APPDATA}\\npm;${env:PATH}"
+  }
+}
