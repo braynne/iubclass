@@ -8,6 +8,7 @@ import { EjemploIntegrados } from './pipes/ejemplo-integrados';
 import { EjemploPipePropio } from './pipes/ejemplo-pipe-propio';
 import { EjemploPipePuro } from './pipes/ejemplo-pipe-puro';
 import { EjemploEstilos } from './estilos/ejemplo-estilos';
+import { Taller02 } from './taller02/taller02';
 
 // =============================================================================
 //  S03 · Página de ejemplos · ruta /s03
@@ -23,6 +24,7 @@ import { EjemploEstilos } from './estilos/ejemplo-estilos';
   imports: [
     EjemploIf, EjemploFor, EjemploTrack, EjemploSwitch, EjemploHeredado,
     EjemploIntegrados, EjemploPipePropio, EjemploPipePuro, EjemploEstilos,
+    Taller02,
   ],
   template: `
     <h2 class="text-2xl font-bold text-slate-900">Sesión S03 · Control de flujo, pipes y estilos</h2>
@@ -79,6 +81,13 @@ import { EjemploEstilos } from './estilos/ejemplo-estilos';
       <p class="meta">Ejemplo 9 · Diapositivas 28 a 30 · estilos/ejemplo-estilos.ts</p>
       <h4>Binding de clase y de estilo, y encapsulación</h4>
       <app-ejemplo-estilos />
+    </section>
+
+    <h3 class="bloque">Taller 02</h3>
+    <section class="tarjeta">
+      <p class="meta">Taller 02 · RA1 · CE2, CE3 y CE4 · taller02/taller02.ts</p>
+      <h4>Listado con filtros, estados y pipe propio</h4>
+      <app-taller02 />
     </section>
   `,
   styles: `
